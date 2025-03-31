@@ -9,11 +9,13 @@ const dataFixer = require('./dataFixer');
 const analyzer = require('./analyzer');
 const utils = require('./utils');
 const contextExtractor = require('./contextExtractor');
+const assetCreator = require('./assetCreator');
 
 // Export all modules
 module.exports = {
   dataFixer,
   analyzer,
   utils,
-  contextExtractor
+  contextExtractor,
+  assetCreator
 };

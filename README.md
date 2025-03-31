@@ -22,6 +22,12 @@ Repository: [https://github.com/JefroB/AI-Tools-RPGMaker_MV](https://github.com/
   - Generates human-readable summaries of game content
   - Creates documentation for game guides
 
+- **Asset Creator**: Analyze and create game assets for RPG Maker MV projects
+  - Analyzes how images are used in the game
+  - Identifies missing and unused assets
+  - Generates contextual prompts for creating new assets
+  - Helps integrate new assets into the game
+
 - **RPG Maker MV Utilities**: Helper functions for working with RPG Maker MV projects
   - Load and save data files
   - Access game data (actors, classes, maps, etc.)
@@ -129,6 +135,56 @@ async function extractComponents() {
 
 For more detailed information about the Context Extractor, see the [ContextExtractor.md](./docs/ContextExtractor.md) documentation.
 
+### Analyzing and Creating Assets
+
+```javascript
+const rpgmakerTools = require('rpgmaker-ai-tools');
+
+async function analyzeAssets() {
+  // Analyze image assets in a project
+  const assetAnalysis = await rpgmakerTools.analyzeImageAssets('path/to/project');
+  
+  console.log('Project Name:', assetAnalysis.projectName);
+  console.log('Character Assets:', assetAnalysis.characterAssets.length);
+  console.log('Map Assets:', assetAnalysis.mapAssets.length);
+  console.log('Battle Assets:', assetAnalysis.battleAssets.length);
+  console.log('Missing Assets:', assetAnalysis.missingAssets.length);
+  console.log('Unused Assets:', assetAnalysis.unusedAssets.length);
+  
+  // Generate prompts for missing assets
+  if (assetAnalysis.missingAssets.length > 0) {
+    // Extract context from the project
+    const context = await rpgmakerTools.extractContext('path/to/project');
+    
+    // Generate a prompt for a missing asset
+    const missingAsset = assetAnalysis.missingAssets[0];
+    const assetRequest = rpgmakerTools.generateMissingAssetRequest(missingAsset, context);
+    
+    console.log('Asset Type:', assetRequest.assetInfo.type);
+    console.log('Asset Name:', assetRequest.assetInfo.name);
+    console.log('Prompt:', assetRequest.claudePrompt);
+    
+    // Save the prompt to a file
+    const fs = require('fs-extra');
+    await fs.writeFile('asset-prompt.md', assetRequest.claudePrompt, 'utf8');
+  }
+  
+  // Save a new asset to the project
+  const fs = require('fs-extra');
+  const imageData = await fs.readFile('path/to/new/asset.png');
+  const savedPath = await rpgmakerTools.assetCreator.saveImageAsset(
+    'path/to/project',
+    rpgmakerTools.assetCreator.IMAGE_DIRECTORIES.CHARACTERS,
+    'NewCharacter.png',
+    imageData
+  );
+  
+  console.log('Saved new asset to:', savedPath);
+}
+```
+
+For more detailed information about the Asset Creator, see the [AssetCreator.md](./docs/AssetCreator.md) documentation.
+
 ### Using RPG Maker MV Utilities
 
 ```javascript
@@ -195,6 +251,18 @@ Options:
 - `--map-characters`: Map character relationships (default: true)
 - `--analyze-systems`: Analyze game systems (default: true)
 - `--generate-summaries`: Generate contextual summaries (default: true)
+
+### Analyze Assets
+
+```bash
+npx rpgmaker-ai-tools analyze-assets <path-to-project> [options]
+```
+
+Options:
+- `--output-dir <dir>`: Directory to write asset analysis and prompts to
+- `--generate-prompts`: Generate prompts for missing assets (default: true)
+- `--max-prompts <number>`: Maximum number of prompts to generate (default: 10)
+- `--prompt-format <format>`: Output format for prompts (markdown or text) (default: markdown)
 
 ## Examples
 
