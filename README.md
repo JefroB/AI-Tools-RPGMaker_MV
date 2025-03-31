@@ -28,6 +28,13 @@ Repository: [https://github.com/JefroB/AI-Tools-RPGMaker_MV](https://github.com/
   - Generates contextual prompts for creating new assets
   - Helps integrate new assets into the game
 
+- **JavaScript Analyzer**: Analyze JavaScript code in RPG Maker MV data files
+  - Extracts JavaScript patterns from data files
+  - Analyzes battle animation scripts, conditional logic, and custom evaluations
+  - Maps relationships between JavaScript and game mechanics
+  - Generates visualizations of code patterns and dependencies
+  - Helps understand how JavaScript affects game functionality
+
 - **RPG Maker MV Utilities**: Helper functions for working with RPG Maker MV projects
   - Load and save data files
   - Access game data (actors, classes, maps, etc.)
@@ -185,6 +192,57 @@ async function analyzeAssets() {
 
 For more detailed information about the Asset Creator, see the [AssetCreator.md](./docs/AssetCreator.md) documentation.
 
+### Analyzing JavaScript Code
+
+```javascript
+const rpgmakerTools = require('rpgmaker-ai-tools');
+
+async function analyzeJavaScript() {
+  // Extract JavaScript patterns
+  const patterns = await rpgmakerTools.jsAnalyzer.patternExtractor.extractPatterns('path/to/project');
+  
+  console.log('Battle Animation Patterns:', patterns.battleAnimationPatterns.length);
+  console.log('Conditional Logic Patterns:', patterns.conditionalLogicPatterns.length);
+  console.log('Custom Eval Patterns:', patterns.customEvalPatterns.length);
+  console.log('Game Tag Patterns:', patterns.gameTagPatterns.length);
+  
+  // Analyze battle animations
+  const battleAnimations = await rpgmakerTools.jsAnalyzer.battleAnimationAnalyzer.analyzeBattleAnimations('path/to/project');
+  
+  // Analyze conditional logic
+  const conditionalLogic = await rpgmakerTools.jsAnalyzer.conditionalLogicAnalyzer.analyzeConditionalLogic('path/to/project');
+  
+  // Analyze custom evaluations
+  const customEvals = await rpgmakerTools.jsAnalyzer.customEvalAnalyzer.analyzeCustomEvals('path/to/project');
+  
+  // Analyze game tags
+  const gameTags = await rpgmakerTools.jsAnalyzer.gameTagAnalyzer.analyzeGameTags('path/to/project');
+  
+  // Map relationships
+  const relationships = await rpgmakerTools.jsAnalyzer.relationshipMapper.mapJavaScriptRelationships('path/to/project', {
+    battleAnimations,
+    conditionalLogic,
+    customEvals,
+    gameTags
+  });
+  
+  // Generate visualizations
+  const visualizations = await rpgmakerTools.jsAnalyzer.visualizer.generateVisualizations('path/to/project', {
+    battleAnimations,
+    conditionalLogic,
+    customEvals,
+    gameTags,
+    relationships
+  }, {
+    outputDir: 'path/to/output/visualizations'
+  });
+  
+  console.log('Generated visualizations:', visualizations.outputFiles.length);
+}
+```
+
+For more detailed information about the JavaScript Analyzer, see the [JavaScriptAnalyzer.md](./docs/JavaScriptAnalyzer.md) documentation.
+
 ### Using RPG Maker MV Utilities
 
 ```javascript
@@ -263,6 +321,22 @@ Options:
 - `--generate-prompts`: Generate prompts for missing assets (default: true)
 - `--max-prompts <number>`: Maximum number of prompts to generate (default: 10)
 - `--prompt-format <format>`: Output format for prompts (markdown or text) (default: markdown)
+
+### Analyze JavaScript
+
+```bash
+npx rpgmaker-ai-tools analyze-javascript <path-to-project> [options]
+```
+
+Options:
+- `--output-dir <dir>`: Directory to write analysis results to
+- `--battle-animations`: Include battle animation analysis
+- `--conditional-logic`: Include conditional logic analysis
+- `--custom-evals`: Include custom evaluation analysis
+- `--game-tags`: Include game tag analysis
+- `--relationships`: Include relationship mapping
+- `--visualizations`: Generate visualizations
+- `--all`: Include all analyses (default)
 
 ## Examples
 

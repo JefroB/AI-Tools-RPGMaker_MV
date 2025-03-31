@@ -184,15 +184,26 @@ function searchInObject(obj, pattern, path = '') {
     
     if (typeof value === 'string') {
       // Check if the string matches the pattern
-      const stringMatches = [...value.matchAll(pattern)];
+      let match;
+      let stringMatches = [];
+      
+      // Use exec in a loop instead of matchAll for compatibility
+      const clonedPattern = new RegExp(pattern.source, pattern.flags);
+      while ((match = clonedPattern.exec(value)) !== null) {
+        stringMatches.push({
+          text: match[0],
+          index: match.index
+        });
+        
+        // If not using global flag, break to avoid infinite loop
+        if (!clonedPattern.global) break;
+      }
+      
       if (stringMatches.length > 0) {
         matches.push({
           path: currentPath,
           value: value,
-          matches: stringMatches.map(match => ({
-            text: match[0],
-            index: match.index
-          }))
+          matches: stringMatches
         });
       }
     } else if (Array.isArray(value)) {
@@ -200,15 +211,26 @@ function searchInObject(obj, pattern, path = '') {
       for (let i = 0; i < value.length; i++) {
         const arrayPath = `${currentPath}[${i}]`;
         if (typeof value[i] === 'string') {
-          const stringMatches = [...value[i].matchAll(pattern)];
+          let match;
+          let stringMatches = [];
+          
+          // Use exec in a loop instead of matchAll for compatibility
+          const clonedPattern = new RegExp(pattern.source, pattern.flags);
+          while ((match = clonedPattern.exec(value[i])) !== null) {
+            stringMatches.push({
+              text: match[0],
+              index: match.index
+            });
+            
+            // If not using global flag, break to avoid infinite loop
+            if (!clonedPattern.global) break;
+          }
+          
           if (stringMatches.length > 0) {
             matches.push({
               path: arrayPath,
               value: value[i],
-              matches: stringMatches.map(match => ({
-                text: match[0],
-                index: match.index
-              }))
+              matches: stringMatches
             });
           }
         } else if (typeof value[i] === 'object' && value[i] !== null) {

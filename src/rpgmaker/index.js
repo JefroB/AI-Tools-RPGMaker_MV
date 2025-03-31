@@ -10,6 +10,7 @@ const analyzer = require('./analyzer');
 const utils = require('./utils');
 const contextExtractor = require('./contextExtractor');
 const assetCreator = require('./assetCreator');
+const jsAnalyzer = require('./jsAnalyzer');
 
 // Export all modules
 module.exports = {
@@ -17,5 +18,6 @@ module.exports = {
   analyzer,
   utils,
   contextExtractor,
-  assetCreator
+  assetCreator,
+  jsAnalyzer
 };

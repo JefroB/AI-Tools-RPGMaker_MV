@@ -9,6 +9,7 @@
  */
 
 const path = require('path');
+const fs = require('fs-extra');
 const { utils } = require('../src/rpgmaker');
 
 // Get project path from command line arguments
@@ -30,14 +31,16 @@ const loreElements = {
 
 async function main() {
   try {
-    console.log(`Checking if ${projectPath} is a valid RPG Maker MV project...`);
-    const isValid = await utils.isValidProject(projectPath);
-    if (!isValid) {
-      console.error(`Error: ${projectPath} is not a valid RPG Maker MV project`);
+    console.log('Starting fix-world-lore script...');
+    console.log(`Checking if ${projectPath} has a data directory...`);
+    const dataPath = path.join(projectPath, 'data');
+    const dataExists = await fs.pathExists(dataPath);
+    if (!dataExists) {
+      console.error(`Error: ${projectPath} does not have a data directory`);
       process.exit(1);
     }
     
-    console.log('Project is valid. Searching for lore elements to fix...');
+    console.log('Data directory found. Searching for lore elements to fix...');
     
     // First, search for occurrences to see what will be changed
     for (const [oldTerm, newTerm] of Object.entries(loreElements)) {
@@ -86,4 +89,8 @@ async function main() {
   }
 }
 
-main();
+main().catch(error => {
+  console.error('Unhandled error in main function:');
+  console.error(error);
+  process.exit(1);
+});
