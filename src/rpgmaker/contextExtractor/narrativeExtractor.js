@@ -36,10 +36,10 @@ async function extractNarrative(projectPath) {
     const systemPath = path.join(dataPath, 'System.json');
     if (await fs.pathExists(systemPath)) {
       const systemData = parseJson(await fs.readFile(systemPath, 'utf8'));
-      narrative.title = systemData?.gameTitle || '';
+      narrative.title = (systemData && systemData.gameTitle) ? systemData.gameTitle : '';
       
       // Extract quest information from switches
-      if (systemData?.switches) {
+      if (systemData && systemData.switches) {
         narrative.mainStory.mainQuests = extractQuestsFromSwitches(systemData.switches);
       }
     }
