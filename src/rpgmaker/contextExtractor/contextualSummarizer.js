@@ -528,7 +528,7 @@ function generateMainCharacterSummaries(characters) {
     
     // If no protagonists, take characters with most relationships
     const mainCharacters = protagonists.length > 0 ? protagonists : 
-      [...characters.characters].sort((a, b) => (b.relationships?.length || 0) - (a.relationships?.length || 0)).slice(0, 5);
+      [...characters.characters].sort((a, b) => (b.relationships && b.relationships.length ? b.relationships.length : 0) - (a.relationships && a.relationships.length ? a.relationships.length : 0)).slice(0, 5);
     
     mainCharacters.forEach(character => {
       const summary = {
