@@ -15,6 +15,7 @@ const analyzer = require('./rpgmaker/analyzer');
 const utils = require('./rpgmaker/utils');
 const contextExtractor = require('./rpgmaker/contextExtractor');
 const assetCreator = require('./rpgmaker/assetCreator');
+const dataGenerator = require('./rpgmaker/dataGenerator');
 
 // Export all modules
 module.exports = {
@@ -27,6 +28,7 @@ module.exports = {
   utils,
   contextExtractor,
   assetCreator,
+  dataGenerator,
 
   // Convenience methods
   fixJson: dataFixer.fixJson,
@@ -34,6 +36,9 @@ module.exports = {
   extractContext: contextExtractor.extractContext,
   analyzeImageAssets: assetCreator.analyzeImageAssets,
   generateMissingAssetRequest: assetCreator.generateMissingAssetRequest,
+  generateActor: dataGenerator.generateActor,
+  generateItem: dataGenerator.generateItem,
+  generateRelatedData: dataGenerator.generateRelatedData,
 
   // Version information
   version: require('../package.json').version
