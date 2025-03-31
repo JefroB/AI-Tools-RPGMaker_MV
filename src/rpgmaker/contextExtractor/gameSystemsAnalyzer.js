@@ -363,11 +363,11 @@ function extractSkillInfo(skills, gameSystems) {
       mpCost: skill.mpCost,
       tpCost: skill.tpCost,
       damage: {
-        type: skill.damage?.type || 0,
-        elementId: skill.damage?.elementId || 0,
-        formula: skill.damage?.formula || '',
-        variance: skill.damage?.variance || 0,
-        critical: skill.damage?.critical || false
+        type: (skill.damage && skill.damage.type) ? skill.damage.type : 0,
+        elementId: (skill.damage && skill.damage.elementId) ? skill.damage.elementId : 0,
+        formula: (skill.damage && skill.damage.formula) ? skill.damage.formula : '',
+        variance: (skill.damage && skill.damage.variance) ? skill.damage.variance : 0,
+        critical: (skill.damage && skill.damage.critical) ? skill.damage.critical : false
       },
       effects: skill.effects || [],
       hitType: skill.hitType,
