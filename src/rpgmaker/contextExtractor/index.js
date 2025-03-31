@@ -57,7 +57,7 @@ async function extractContext(projectPath, options = {}) {
     const systemPath = path.join(dataPath, 'System.json');
     if (await fs.pathExists(systemPath)) {
       const systemData = parseJson(await fs.readFile(systemPath, 'utf8'));
-      result.projectName = systemData?.gameTitle || path.basename(projectPath);
+      result.projectName = (systemData && systemData.gameTitle) ? systemData.gameTitle : path.basename(projectPath);
     } else {
       result.projectName = path.basename(projectPath);
     }
