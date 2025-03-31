@@ -24,7 +24,10 @@ async function analyzeGameSystems(projectPath) {
       skills: [],
       states: [],
       battleSystem: 'unknown',
-      mechanics: []
+      mechanics: [],
+      skillTypes: [],
+      enemies: [],
+      troops: []
     },
     progression: {
       classes: [],
@@ -34,12 +37,14 @@ async function analyzeGameSystems(projectPath) {
     economy: {
       currency: '',
       items: [],
-      shops: []
+      shops: [],
+      shopItems: []
     },
     equipment: {
       types: [],
       weapons: [],
-      armors: []
+      armors: [],
+      slots: []
     },
     customSystems: []
   };
@@ -443,11 +448,11 @@ function extractItemInfo(items, gameSystems) {
       successRate: item.successRate,
       hitType: item.hitType,
       damage: item.damage ? {
-        type: item.damage.type || 0,
-        elementId: item.damage.elementId || 0,
-        formula: item.damage.formula || '',
-        variance: item.damage.variance || 0,
-        critical: item.damage.critical || false
+        type: (item.damage && item.damage.type) ? item.damage.type : 0,
+        elementId: (item.damage && item.damage.elementId) ? item.damage.elementId : 0,
+        formula: (item.damage && item.damage.formula) ? item.damage.formula : '',
+        variance: (item.damage && item.damage.variance) ? item.damage.variance : 0,
+        critical: (item.damage && item.damage.critical) ? item.damage.critical : false
       } : null
     };
     
