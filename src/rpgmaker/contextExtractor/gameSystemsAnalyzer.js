@@ -478,7 +478,8 @@ function extractItemInfo(items, gameSystems) {
     'Key Item': [],
     'Battle': [],
     'Menu': [],
-    'Never': []
+    'Never': [],
+    'Always': []
   };
   
   itemInfo.forEach(item => {
