@@ -136,28 +136,31 @@ async function analyzeImageAssets(projectPath) {
         
         // Add to missing assets if any images are missing
         if (!characterAsset.hasCharacterImage) {
+          const filename = characterAsset.characterImage ? `${characterAsset.characterImage}.png` : `${character.name}_character.png`;
           assetAnalysis.missingAssets.push({
             type: 'character',
             directory: IMAGE_DIRECTORIES.CHARACTERS,
-            filename: `${characterAsset.characterImage}.png`,
+            filename: filename,
             relatedEntity: character
           });
         }
         
         if (!characterAsset.hasFaceImage) {
+          const filename = characterAsset.faceImage ? `${characterAsset.faceImage}.png` : `${character.name}_face.png`;
           assetAnalysis.missingAssets.push({
             type: 'face',
             directory: IMAGE_DIRECTORIES.FACES,
-            filename: `${characterAsset.faceImage}.png`,
+            filename: filename,
             relatedEntity: character
           });
         }
         
         if (!characterAsset.hasBattlerImage) {
+          const filename = characterAsset.battlerImage ? `${characterAsset.battlerImage}.png` : `${character.name}_battler.png`;
           assetAnalysis.missingAssets.push({
             type: 'battler',
             directory: IMAGE_DIRECTORIES.SV_ACTORS,
-            filename: `${characterAsset.battlerImage}.png`,
+            filename: filename,
             relatedEntity: character
           });
         }
