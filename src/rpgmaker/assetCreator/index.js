@@ -8,7 +8,7 @@
 
 const fs = require('fs-extra');
 const path = require('path');
-const { contextExtractor } = require('../contextExtractor');
+const contextExtractor = require('../contextExtractor');
 
 // Image directory structure in RPG Maker MV
 const IMAGE_DIRECTORIES = {
