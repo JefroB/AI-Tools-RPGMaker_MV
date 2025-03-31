@@ -465,7 +465,7 @@ function generateCharacterImagePrompt(character, imageType, context) {
     if (context.world && context.world.name) {
       prompt.contextualInformation.world = {
         name: context.world.name,
-        description: context.world.description || `A futuristic post-apocalyptic world set in the year 2049 A.E. (After Event)`
+        description: context.world.description || `A futuristic post-apocalyptic world set in the year 2049 A.E. (After Earth)`
       };
     }
     
@@ -554,7 +554,7 @@ function generateEnemyImagePrompt(enemy, imageType, context) {
     if (context.world && context.world.name) {
       prompt.contextualInformation.world = {
         name: context.world.name,
-        description: context.world.description || `A futuristic post-apocalyptic world set in the year 2049 A.E. (After Event)`
+        description: context.world.description || `A futuristic post-apocalyptic world set in the year 2049 A.E. (After Earth)`
       };
     }
     
@@ -637,7 +637,7 @@ function generateTilesetImagePrompt(tileset, tilesetName, context) {
     if (context.world && context.world.name) {
       prompt.contextualInformation.world = {
         name: context.world.name,
-        description: context.world.description || `A futuristic post-apocalyptic world set in the year 2049 A.E. (After Event)`
+        description: context.world.description || `A futuristic post-apocalyptic world set in the year 2049 A.E. (After Earth)`
       };
     }
     
@@ -715,7 +715,7 @@ function generateClaudePrompt(assetInfo, context) {
     if (assetInfo.contextualInformation.world) {
       prompt += `### World\n`;
       prompt += `- Name: ${assetInfo.contextualInformation.world.name}\n`;
-      const worldDesc = assetInfo.contextualInformation.world.description || `A futuristic post-apocalyptic world set in the year 2049 A.E. (After Event)`;
+      const worldDesc = assetInfo.contextualInformation.world.description || `A futuristic post-apocalyptic world set in the year 2049 A.E. (After Earth)`;
       prompt += `- Description: ${worldDesc}\n\n`;
     }
     
@@ -910,7 +910,7 @@ function generateMissingAssetRequest(missingAsset, context) {
           contextualInformation: {
             world: context.world ? {
               name: context.world.name,
-              description: context.world.description || `A futuristic post-apocalyptic world set in the year 2049 A.E. (After Event)`
+              description: context.world.description || `A futuristic post-apocalyptic world set in the year 2049 A.E. (After Earth)`
             } : undefined,
             gameStyle: {
               genre: determineGameGenre(context)

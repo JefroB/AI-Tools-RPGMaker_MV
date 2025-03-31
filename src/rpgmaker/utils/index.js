@@ -9,6 +9,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 const { parseJson, stringifyJson } = require('../../core');
+const textReplacer = require('./textReplacer');
 
 /**
  * RPG Maker MV file types
@@ -372,5 +373,12 @@ module.exports = {
   isValidProject,
   getPlugins,
   getPluginParameters,
-  hasPlugin
+  hasPlugin,
+  
+  // Text replacement utilities
+  searchText: textReplacer.searchText,
+  replaceText: textReplacer.replaceText,
+  generateReplacementReport: textReplacer.generateReplacementReport,
+  fixTerminology: textReplacer.fixTerminology,
+  updateLore: textReplacer.updateLore
 };
