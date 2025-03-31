@@ -48,7 +48,7 @@ async function analyzeAssets() {
       await fs.ensureDir(promptsDir);
       
       // Extract context from the project
-      const { contextExtractor } = require('../src/rpgmaker');
+      const contextExtractor = require('../src/rpgmaker/contextExtractor');
       const context = await contextExtractor.extractContext(projectPath);
       
       // Generate prompts for each missing asset
