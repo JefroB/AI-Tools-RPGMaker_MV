@@ -32,7 +32,7 @@ async function buildWorld(projectPath) {
     const systemPath = path.join(dataPath, 'System.json');
     if (await fs.pathExists(systemPath)) {
       const systemData = parseJson(await fs.readFile(systemPath, 'utf8'));
-      world.name = systemData?.gameTitle || '';
+      world.name = (systemData && systemData.gameTitle) ? systemData.gameTitle : '';
     }
 
     // Extract map information from MapInfos.json
