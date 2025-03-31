@@ -148,7 +148,7 @@ function extractEnemies(enemies) {
     
     // Only include enemies that are likely to be significant characters
     // (based on having a name that's not generic)
-    const name = enemy.name.toLowerCase();
+    const name = enemy.name ? enemy.name.toLowerCase() : '';
     const isGeneric = name.includes('slime') || 
                       name.includes('bat') || 
                       name.includes('wolf') || 
