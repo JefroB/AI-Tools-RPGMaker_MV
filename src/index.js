@@ -18,16 +18,18 @@ const utils = require('./rpgmaker/utils');
 module.exports = {
   // Core utilities
   ...core,
-  
+
   // RPG Maker specific utilities
   dataFixer,
   analyzer,
   utils,
-  
+  contextExtractor: require('./rpgmaker/contextExtractor'),
+
   // Convenience methods
   fixJson: dataFixer.fixJson,
   analyzeProject: analyzer.analyzeProject,
-  
+  extractContext: require('./rpgmaker/contextExtractor').extractContext,
+
   // Version information
   version: require('../package.json').version
 };

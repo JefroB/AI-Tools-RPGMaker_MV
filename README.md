@@ -1,6 +1,8 @@
 # RPG Maker AI Tools
 
-A collection of AI-powered tools for RPG Maker MV projects. This library provides utilities for analyzing and fixing RPG Maker MV data files, as well as other helpful tools for RPG Maker MV development.
+A collection of AI-powered tools for RPG Maker MV projects. This library provides utilities for analyzing and fixing RPG Maker MV data files as well as other helpful tools for RPG Maker MV development.
+
+Repository: [https://github.com/JefroB/AI-Tools-RPGMaker_MV](https://github.com/JefroB/AI-Tools-RPGMaker_MV)
 
 ## Features
 
@@ -8,12 +10,18 @@ A collection of AI-powered tools for RPG Maker MV projects. This library provide
   - Multiple approaches with increasing levels of sophistication
   - Handles common issues like missing commas, malformed arrays, etc.
   - Can fix entire directories of files at once
-  
+
 - **Project Analyzer**: Analyze RPG Maker MV projects for issues
   - Identifies common problems in JSON files
   - Checks for JavaScript issues in note fields
   - Generates detailed reports with HTML visualization
-  
+
+- **Context Extractor**: Extract contextual information from RPG Maker MV projects
+  - Analyzes narrative, world, characters, and game systems
+  - Maps relationships between characters and locations
+  - Generates human-readable summaries of game content
+  - Creates documentation for game guides
+
 - **RPG Maker MV Utilities**: Helper functions for working with RPG Maker MV projects
   - Load and save data files
   - Access game data (actors, classes, maps, etc.)
@@ -78,6 +86,49 @@ async function analyzeProject() {
 }
 ```
 
+### Extracting Context
+
+```javascript
+const rpgmakerTools = require('rpgmaker-ai-tools');
+
+async function extractContext() {
+  // Extract all context from a project
+  const context = await rpgmakerTools.extractContext('path/to/project');
+  
+  console.log('Project Name:', context.projectName);
+  console.log('Maps:', context.world.locations.length);
+  console.log('Characters:', context.characters.characters.length);
+  
+  // Generate summaries
+  const summaries = await rpgmakerTools.contextExtractor.generateSummaries('path/to/project', context);
+  
+  // Save summaries to files
+  const fs = require('fs-extra');
+  await fs.writeFile('game-overview.md', summaries.gameOverview, 'utf8');
+  await fs.writeFile('narrative.md', summaries.narrative, 'utf8');
+  await fs.writeFile('world.md', summaries.world, 'utf8');
+  await fs.writeFile('characters.md', summaries.characters, 'utf8');
+  await fs.writeFile('game-systems.md', summaries.gameSystems, 'utf8');
+}
+
+// Extract specific components
+async function extractComponents() {
+  // Extract narrative information
+  const narrative = await rpgmakerTools.contextExtractor.extractNarrative('path/to/project');
+  
+  // Build world information
+  const world = await rpgmakerTools.contextExtractor.buildWorld('path/to/project');
+  
+  // Map character relationships
+  const characters = await rpgmakerTools.contextExtractor.mapCharacterRelationships('path/to/project');
+  
+  // Analyze game systems
+  const gameSystems = await rpgmakerTools.contextExtractor.analyzeGameSystems('path/to/project');
+}
+```
+
+For more detailed information about the Context Extractor, see the [ContextExtractor.md](./docs/ContextExtractor.md) documentation.
+
 ### Using RPG Maker MV Utilities
 
 ```javascript
@@ -129,6 +180,21 @@ Options:
 - `--recursive`: Process files recursively
 - `--include <pattern>`: File pattern to include (can be used multiple times)
 - `--exclude <pattern>`: File pattern to exclude (can be used multiple times)
+
+### Extract Context
+
+```bash
+npx rpgmaker-ai-tools extract-context <path-to-project> [options]
+```
+
+Options:
+- `--output-dir <dir>`: Directory to write extracted context and summaries to
+- `--format <format>`: Output format (json, markdown, or both) (default: both)
+- `--extract-narrative`: Extract narrative information (default: true)
+- `--build-world`: Build world information (default: true)
+- `--map-characters`: Map character relationships (default: true)
+- `--analyze-systems`: Analyze game systems (default: true)
+- `--generate-summaries`: Generate contextual summaries (default: true)
 
 ## Examples
 
